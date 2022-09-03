@@ -3,7 +3,7 @@
 #
 
 terraform {
-  required_version = "~> 0.13"
+  required_version = "~> 1.0"
 }
 
 provider "aws" {
@@ -37,7 +37,10 @@ module "lambda" {
   lambda_alias_name             = ""
   lambda_alias_function_version = "$LATEST"
   lambda_alias_routing_config = {
-    "2" = 0.5
+    additional_version_weights = {
+      "2" = 0.5
+      "1" = 1
+    }
   }
 
   # Add lambda event source mapping
@@ -63,9 +66,9 @@ module "lambda" {
 
   lambda_permission_source_arn = "arn:aws:events:eu-west-1:111122223333:rule/RunDaily"
 
-  tags = map(
-    "ENV", "dev",
-    "Createdby", "Vitalii Natarov",
-    "Orchestration", "Terraform"
-  )
+  tags = tomap({
+    "Environment"   = "dev",
+    "Createdby"     = "Vitaliy Natarov",
+    "Orchestration" = "Terraform"
+  })
 }

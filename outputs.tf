@@ -31,6 +31,11 @@ output "lambda_function_source_code_size" {
   value       = element(concat(aws_lambda_function.lambda_function.*.source_code_size, [""]), 0)
 }
 
+output "lambda_function_invoke_arn" {
+  description = "ARN to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri."
+  value       = element(concat(aws_lambda_function.lambda_function.*.invoke_arn, [""]), 0)
+}
+
 #---------------------------------------------------
 # AWS lambda alias
 #---------------------------------------------------
@@ -127,4 +132,27 @@ output "lambda_provisioned_concurrency_config_id" {
 output "lambda_permission_id" {
   description = "ID of lambda permission"
   value       = element(concat(aws_lambda_permission.lambda_permission.*.id, [""]), 0)
+}
+
+#---------------------------------------------------
+# AWS lambda code signing config
+#---------------------------------------------------
+output "lambda_code_signing_config_id" {
+  description = "ID of lambda code signing config"
+  value       = element(concat(aws_lambda_code_signing_config.lambda_code_signing_config.*.id, [""]), 0)
+}
+
+output "lambda_code_signing_config_arn" {
+  description = "The Amazon Resource Name (ARN) of the code signing configuration."
+  value       = element(concat(aws_lambda_code_signing_config.lambda_code_signing_config.*.arn, [""]), 0)
+}
+
+output "lambda_code_signing_config_config_id" {
+  description = "Unique identifier for the code signing configuration."
+  value       = element(concat(aws_lambda_code_signing_config.lambda_code_signing_config.*.config_id, [""]), 0)
+}
+
+output "lambda_code_signing_config_last_modified" {
+  description = "The date and time that the code signing configuration was last modified."
+  value       = element(concat(aws_lambda_code_signing_config.lambda_code_signing_config.*.last_modified, [""]), 0)
 }

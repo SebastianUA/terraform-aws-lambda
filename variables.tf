@@ -127,7 +127,7 @@ variable "lambda_function_environment" {
 
 variable "lambda_function_timeouts" {
   description = "Set timeouts for AWS Lambda"
-  default     = []
+  default     = {}
 }
 
 #---------------------------------------------------
@@ -160,7 +160,7 @@ variable "lambda_alias_function_version" {
 
 variable "lambda_alias_routing_config" {
   description = "(Optional) The Lambda alias' route configuration settings."
-  default     = null
+  default     = {}
 }
 
 #---------------------------------------------------
@@ -264,16 +264,6 @@ variable "lambda_function_event_invoke_config_destination_config" {
   default     = []
 }
 
-variable "lambda_function_event_invoke_config_destination_config_on_failure" {
-  description = "(Optional) Configuration block with destination configuration with on_failure usage"
-  default     = []
-}
-
-variable "lambda_function_event_invoke_config_destination_config_on_success" {
-  description = "(Optional) Configuration block with destination configuration with on_success usage"
-  default     = []
-}
-
 #---------------------------------------------------
 # AWS lambda layer version
 #---------------------------------------------------
@@ -352,7 +342,7 @@ variable "lambda_provisioned_concurrency_config_provisioned_concurrent_execution
 
 variable "lambda_provisioned_concurrency_config_timeouts" {
   description = "aws_lambda_provisioned_concurrency_config provides the following Timeouts configuration options that can be set up"
-  default     = []
+  default     = {}
 }
 
 #---------------------------------------------------
@@ -406,4 +396,27 @@ variable "lambda_permission_statement_id" {
 variable "lambda_permission_statement_id_prefix" {
   description = "(Optional) A statement identifier prefix. Terraform will generate a unique suffix. Conflicts with statement_id."
   default     = null
+}
+
+#---------------------------------------------------
+# AWS lambda code signing config
+#---------------------------------------------------
+variable "enable_code_signing_config" {
+  description = "Enable code signing config usage"
+  default     = false
+}
+
+variable "lambda_code_signing_config_allowed_publishers" {
+  description = "(Required) A configuration block of allowed publishers as signing profiles for this code signing configuration. "
+  default     = []
+}
+
+variable "lambda_code_signing_config_description" {
+  description = "(Optional) Descriptive name for this code signing configuration."
+  default     = null
+}
+
+variable "lambda_code_signing_config_policies" {
+  description = "(Optional) A configuration block of code signing policies that define the actions to take if the validation checks fail. "
+  default     = []
 }
